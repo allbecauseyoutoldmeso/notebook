@@ -1,0 +1,3 @@
+testNoteHasText();
+testCreateNote();
+testShowNotes();
