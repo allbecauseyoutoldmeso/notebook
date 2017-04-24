@@ -10,65 +10,58 @@ var assert = {
 
 var check = {
   toInclude: function(container, contained) {
-    if(!Array.isArray(container)) {
-      throw new Error(container + ' is not an array.  Oops.');
-    }
     if(container.includes(contained)) {
       console.log("It passed! You guys rock!");
-    } else
-      throw new Error("Unlucky! " + container + " did not contain " + contained);
-  }
-};
-
-var observe = {
-  toChange: function(testedFunction, array, number) {
-    initialLength = array.length;
-    testedFunction();
-    if(array.length - initialLength === number) {
-      console.log('Sweet. Your array was changed by ' + number);
-    } else if(!Array.isArray(array)) {
-      throw new Error(array + ' is not an array.  Oops.');
     } else {
-      console.log('Dang. ' + array + 'was not changed');
+      throw new Error("Unlucky! " + container + " did not contain " + contained);
     }
   }
 };
 
 (function(exports) {
 
-function testNoteHasText() {
+  function testNoteHasText() {
+    var note = new Note("Hello!");
+    assert.toEqual(note.showText(), "Hello!");
+  }
 
-  var note = new Note("Hello!");
-  assert.toEqual(note.showText(), "Hello!");
-}
-
-exports.testNoteHasText = testNoteHasText;
-
-})(this);
-
-(function(exports) {
+  function testShowNotes() {
+    var noteList = new NoteList();
+    noteList.createNote("Bye now!");
+    assert.toEqual(noteList.showNotes().length, 1);
+  }
 
   function testCreateNote() {
-
     var noteList = new NoteList();
     noteList.createNote("Howdy!");
     assert.toEqual(noteList._notes.length, 1);
   }
 
-  exports.testCreateNote = testCreateNote;
-
-})(this);
-
-(function(exports) {
-
-  function testShowNotes() {
-
+  function testMakeList() {
     var noteList = new NoteList();
-    noteList.createNote("Howdy!");
-    noteList.createNote("Bye now!");
-    assert.toEqual(noteList.showNotes().length, 2);
+    noteList.createNote('my note');
+    var noteListView = new NoteListView(noteList);
+    assert.toEqual(noteListView.makeList(), '<ul><li><div>my note</div></li></ul>');
   }
 
-  exports.testShowNotes = testShowNotes;
+  function testMakeListForEmptyList() {
+    var noteList = new NoteList();
+    var noteListView = new NoteListView(noteList);
+    assert.toEqual(noteListView.makeList(), '<ul></ul>');
+  }
 
+  function testMakeListForMultipleNotes() {
+    var noteList = new NoteList();
+    noteList.createNote('my note');
+    noteList.createNote('another note');
+    var noteListView = new NoteListView(noteList);
+    assert.toEqual(noteListView.makeList(), '<ul><li><div>my note</div></li><li><div>another note</div></li></ul>');
+  }
+
+  exports.testMakeListForMultipleNotes = testMakeListForMultipleNotes;
+  exports.testMakeListForEmptyList = testMakeListForEmptyList;
+  exports.testMakeList = testMakeList;
+  exports.testNoteHasText = testNoteHasText;
+  exports.testCreateNote = testCreateNote;
+  exports.testShowNotes = testShowNotes;
 })(this);

@@ -4,8 +4,8 @@ function NoteList() {
   this._notes = [];
 }
 
-NoteList.prototype.createNote = function() {
-  note = new Note();
+NoteList.prototype.createNote = function(text) {
+  note = new Note(text);
   this._notes.push(note);
 };
 
