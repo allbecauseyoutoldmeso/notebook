@@ -1,16 +1,11 @@
-function changeText(newText) {
-  var elem = document.getElementById('greeting');
-  elem.innerHTML = newText;
-}
-
 (function (exports) {
 
   function NoteController(noteList) {
     this._noteList = noteList;
   }
 
-  NoteController.prototype.addNote = function() {
-    this._noteList.createNote('Tada!');
+  NoteController.prototype.addNote = function(text) {
+    this._noteList.createNote(text);
   };
 
   NoteController.prototype.makeView = function() {

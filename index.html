@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>notebook</title>
-    <script src="note-controller.js"> </script>
-    <script src="src/note-list-view.js"> </script>
-    <script src="src/note-tests.js"> </script>
     <script src="src/note-model.js"> </script>
     <script src="src/note-list-model.js"> </script>
+    <script src="src/note-list-view.js"> </script>
+    <script src="note-controller.js"> </script>
+    <script src="src/note-tests.js"> </script>
     <script src="index.js"> </script>
   </head>
 
@@ -16,10 +16,6 @@
     <div id='greeting'>hello</div>
 
   <script>
-    var noteList = new NoteList();
-    var noteController = new NoteController(noteList);
-    noteController.addNote();
-    noteController.makeView();
     noteController.writeNotes();
   </script>
 
